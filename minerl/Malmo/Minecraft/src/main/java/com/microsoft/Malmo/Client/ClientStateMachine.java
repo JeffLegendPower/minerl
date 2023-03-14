@@ -1159,8 +1159,10 @@ public class ClientStateMachine extends StateMachine implements IMalmoMessageLis
             //if (agents == null || agents.size() <= currentMissionInit().getClientRole())
             //    throw new Exception("No agent section for us!"); // TODO
             this.agentName = agents.get(currentMissionInit().getClientRole()).getName();
-
-            if (agents.size() > 1 && currentMissionInit().getClientRole() != 0)
+            
+            // TODO TEST
+//             if (agents.size() > 1 && currentMissionInit().getClientRole() != 0)
+            if (currentMissionInit().getClientRole() != 0)
             {
                 // Multi-agent mission, we should be joining a server.
                 // (Unless we are already on the correct server.)
