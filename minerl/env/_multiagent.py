@@ -69,6 +69,8 @@ class _MultiAgentEnv(gym.Env):
                  verbose: bool = False,
                  _xml_mutator_to_be_deprecated: Optional[Callable] = None,
                  refresh_instances_every: Optional[int] = None,
+                 server_address: str,
+                 server_port: str,
                  ):
         """
         Constructor of MineRLEnv.
@@ -83,6 +85,9 @@ class _MultiAgentEnv(gym.Env):
         """
         self.task = env_spec
         self.instances = instances if instances is not None else []  # type: List[MinecraftInstance]
+        
+        self.server_address = server_address
+        self.server_port = server_port
 
         # TO DEPRECATE (FOR ENV_SPECS)
         self._xml_mutator_to_be_deprecated = _xml_mutator_to_be_deprecated or (lambda x: x)
@@ -490,6 +495,8 @@ class _MultiAgentEnv(gym.Env):
                 """>
                 <ExperimentUID>{ep_uid}</ExperimentUID>
                 <ClientRole>{role}</ClientRole>
+                <MinecraftServerConnection address="{address}" port="{port}">
+                </MinecraftServerConnection>
                 <ClientAgentConnection>
                 <ClientIPAddress>127.0.0.1</ClientIPAddress>
                 <ClientMissionControlPort>0</ClientMissionControlPort>
@@ -503,7 +510,7 @@ class _MultiAgentEnv(gym.Env):
                 <AgentRewardsPort>0</AgentRewardsPort>
                 <AgentColourMapPort>0</AgentColourMapPort>
                 </ClientAgentConnection>
-             </MissionInit>""".format(ep_uid=ep_uid, role=role))
+             </MissionInit>""".format(ep_uid=ep_uid, role=role, address=self.server_address, port=self.server_port))
             agent_xml_etree.insert(0, agent_xml)
 
             if self._is_interacting and role == 0:
