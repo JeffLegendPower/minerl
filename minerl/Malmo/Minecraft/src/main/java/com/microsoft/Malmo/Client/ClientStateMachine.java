@@ -1162,7 +1162,7 @@ public class ClientStateMachine extends StateMachine implements IMalmoMessageLis
             
             // TODO TEST
 //             if (agents.size() > 1 && currentMissionInit().getClientRole() != 0)
-            if (currentMissionInit().getClientRole() != 0)
+            if (true)
             {
                 // Multi-agent mission, we should be joining a server.
                 // (Unless we are already on the correct server.)
