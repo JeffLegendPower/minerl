@@ -69,8 +69,8 @@ class _MultiAgentEnv(gym.Env):
                  verbose: bool = False,
                  _xml_mutator_to_be_deprecated: Optional[Callable] = None,
                  refresh_instances_every: Optional[int] = None,
-                 server_address: str,
-                 server_port: str,
+                 server_address: str = 'localhost',
+                 server_port: str = '25565',
                  ):
         """
         Constructor of MineRLEnv.
